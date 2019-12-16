@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MusicApp</string>
+    <string name="text7">ド</string>
+    <string name="text6">レ</string>
+    <string name="text5">ミ</string>
+    <string name="text4">ファ</string>
+    <string name="text3">ソ</string>
+    <string name="text2">ラ</string>
+    <string name="text1">シ</string>
+    <string name="text8">○</string>
+    <string name="lessons">LESSONS</string>
+</resources>
