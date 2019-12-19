@@ -17,6 +17,7 @@ public class ExampleUnitTest {
             int x=52*i+2;
             if(x%14==4&&x%19==1&&x%25==5){
                 System.out.println(x);
+                System.out.println(123456);
             }
         }
     }
