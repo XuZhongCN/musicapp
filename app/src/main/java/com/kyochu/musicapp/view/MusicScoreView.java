@@ -104,14 +104,7 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
                     break;
                 }
             }
-
-
-
         }
-
-
-
-
         postInvalidate();
     }
 
@@ -133,8 +126,8 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
     private List<List<Integer>> musicScoreStatic;
     private List<View> topViews=null;
     private List<View> bottomViews=null;
-    private int [] loops={1,1,1,1,1,1,1,1};
-    private int [] imageMarkerFlags={1,0,1,0,1,0,1,1};
+    private int [] loops={1,1,1,1,1,1,1,1,1,1,1,1};
+    private int [] imageMarkerFlags={1,0,1,0,1,0,1,1,1,1,1,1};
 
     public void setImageMarkerFlags(int[] imageMarkerFlags) {
         this.imageMarkerFlags = imageMarkerFlags;
@@ -148,16 +141,25 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
         return musicScore;
     }
 
+    private int chapterSize=3;
+
+    public void setChapterSize(int chapterSize){
+        this.chapterSize=chapterSize;
+        init();
+        setData(initMusicId);
+        postInvalidate();
+    }
+
     public void setData(int initMusicId){
         this.initMusicId=initMusicId;
         List<MusicScore> musicScores=new DMLHelper(this.getContext()).findMusicScoreByMusicId(initMusicId);
         musicScore=new ArrayList<>();
         musicScoreStatic=new ArrayList<>();
         int initSum=0;
-        for(int i=0;i<8;i++){
+        for(int i=0;i<12;i++){
             ArrayList temp=new ArrayList<Integer>();
             ArrayList tempForStatic=new ArrayList<Integer>();
-            for(int j=0;j<4;j++){
+            for(int j=0;j<chapterSize;j++){
                 temp.add(musicScores.get(initSum).getScore());
                 tempForStatic.add(musicScores.get(initSum).getScore());
                 initSum++;
@@ -193,9 +195,9 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
         paint.setStrokeWidth(1);
 
         musicScore=new ArrayList<>();
-        for(int i=0;i<8;i++){
+        for(int i=0;i<12;i++){
             ArrayList temp=new ArrayList<Integer>();
-            for(int j=0;j<4;j++){
+            for(int j=0;j<chapterSize;j++){
                 temp.add(8);
             }
             musicScore.add(temp);
@@ -209,6 +211,10 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
         int width=this.getWidth();
         int height=this.getHeight();
         int rectWidth=(height/7);
+        int horizontalWidth=rectWidth;
+        if(chapterSize==3){
+            //horizontalWidth=rectWidth*4/3;
+        }
         //paint.setColor(0xff229b77);
         paint.setColor(0xff000000);
         for(int i=0;i<9;i++){
@@ -220,24 +226,23 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
         for(int i=0;i<musicScore.size();i++){
             for(int j=0;j<musicScore.get(i).size();j++) {
                 //canvas.drawRect(sum*rectWidth,((8-musicScore.get(i).get(j))-1)*rectWidth,(sum+1)*rectWidth,((8-musicScore.get(i).get(j)))*rectWidth,paint);
+
+
                 if(sum*rectWidth+10<verticalLine&&verticalLine<(sum+1)*rectWidth+10){
                     if(imageMarkerFlags[i]==0){
-                        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver2),sum*rectWidth+10,((8-musicScore.get(i).get(j))-1)*rectWidth+10,paint);
+                        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver2),sum*horizontalWidth+10,((8-musicScore.get(i).get(j))-1)*rectWidth+10,paint);
                     }else{
-                        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver4),sum*rectWidth+10,((8-musicScore.get(i).get(j))-1)*rectWidth+10,paint);
+                        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver4),sum*horizontalWidth+10,((8-musicScore.get(i).get(j))-1)*rectWidth+10,paint);
 
                     }
-
                 }else{
                     if(imageMarkerFlags[i]==0){
-                        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver),sum*rectWidth+10,((8-musicScore.get(i).get(j))-1)*rectWidth+10,paint);
+                        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver),sum*horizontalWidth+10,((8-musicScore.get(i).get(j))-1)*rectWidth+10,paint);
                     }else{
-                        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver3),sum*rectWidth+10,((8-musicScore.get(i).get(j))-1)*rectWidth+10,paint);
+                        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver3),sum*horizontalWidth+10,((8-musicScore.get(i).get(j))-1)*rectWidth+10,paint);
 
                     }
-
                 }
-
                 sum++;
             }
         }
@@ -420,7 +425,7 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
 
     public int verticalLine=-5;
     private int speed=14;
-    private int [] copyLoops={1,1,1,1,1,1,1,1};
+    private int [] copyLoops={1,1,1,1,1,1,1,1,1,1,1,1};
     private boolean isPlaing=false;
     public class PlayMusic implements  Runnable{
         @Override

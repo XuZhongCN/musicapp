@@ -19,12 +19,18 @@
             <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="match_parent" android:orientation="vertical">
-                <TextView
+                <!--<TextView
                     android:text="3/3"
                     android:id="@+id/beat"
                     android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"></TextView>
+                    android:layout_height="40dp"></TextView>-->
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:id="@+id/beat"></Spinner>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -86,7 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <LinearLayout
-                        android:layout_width="2010dp"
+                        android:layout_width="3010dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
                         <LinearLayout
@@ -150,12 +156,41 @@
                                 android:background="@null"
                                 android:gravity="center_vertical|center"
                                 android:id="@+id/top7" android:text="3/3"></Spinner>
+                            <Spinner
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:gravity="center_vertical|center"
+                                android:id="@+id/top8" android:text="3/3"></Spinner>
+                            <Spinner
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:gravity="center_vertical|center"
+                                android:id="@+id/top9" android:text="3/3"></Spinner>
+                            <Spinner
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:gravity="center_vertical|center"
+                                android:id="@+id/top10" android:text="3/3"></Spinner>
+                            <Spinner
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:gravity="center_vertical|center"
+                                android:id="@+id/top11" android:text="3/3"></Spinner>
                         </LinearLayout>
                         <com.kyochu.musicapp.view.MusicScoreView
                             android:id="@+id/musicScoreView"
                             android:layout_width="match_parent"
                             android:layout_height="404dp"
                             android:background="#FAFAFA"></com.kyochu.musicapp.view.MusicScoreView>
+                        <!--  - 1 +  -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
@@ -164,6 +199,7 @@
                             <View
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"></View>
+
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
@@ -355,6 +391,106 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:id="@+id/whileNumber8"
+                                    android:gravity="center_vertical|center"
+                                    android:text="1"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical|center"
+                                    android:text="+"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical|center"
+                                    android:text="-"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:id="@+id/whileNumber9"
+                                    android:gravity="center_vertical|center"
+                                    android:text="1"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical|center"
+                                    android:text="+"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical|center"
+                                    android:text="-"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:id="@+id/whileNumber10"
+                                    android:gravity="center_vertical|center"
+                                    android:text="1"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical|center"
+                                    android:text="+"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical|center"
+                                    android:text="-"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:id="@+id/whileNumber11"
+                                    android:gravity="center_vertical|center"
+                                    android:text="1"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical|center"
+                                    android:text="+"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical|center"
+                                    android:text="-"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:id="@+id/whileNumber12"
                                     android:gravity="center_vertical|center"
                                     android:text="1"/>
                                 <TextView

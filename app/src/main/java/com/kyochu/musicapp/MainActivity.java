@@ -81,8 +81,7 @@ public class MainActivity extends AppCompatActivity {
         initBottomViews();
 
 
-        Music music= new DMLHelper(this).findMusicById(musicIndex+1);
-        ((TextView)findViewById(R.id.beat)).setText(music.getBeat());
+
 
         musicScoreView.postInvalidate();
 
@@ -210,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //            musicScoreView.getMusicScore().set(index,temp);
 //            musicScoreView.invalidate();
-            int [] selectResult={0,0,0,0,0,0,0,0};
+            int [] selectResult={0,0,0,0,0,0,0,0,0,0,0,0};
             for(int i=0;i<topViews.size();i++){
                 Spinner spinner= (Spinner) topViews.get(i);
                 selectResult[i]=spinner.getSelectedItemPosition();
@@ -236,6 +235,21 @@ public class MainActivity extends AppCompatActivity {
             spinner.setOnItemSelectedListener(onItemClickListener);
             spinner.setSelection(0);
         }
+        //Music music= new DMLHelper(this).findMusicById(musicIndex+1);
+        Spinner beat=((Spinner)findViewById(R.id.beat));
+        beat.setAdapter(new ArrayAdapter<String>(this,R.layout.spinner_item_main,new String[]{"3/3","4/4"}));
+        beat.setSelection(0);
+        beat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                musicScoreView.setChapterSize(position+3);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
     private Handler handler=new Handler(){
 

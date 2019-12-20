@@ -10,7 +10,7 @@ public class DBHelper extends SQLiteOpenHelper {
     //***DataBase Name
     private static  final String DATABASE_NAME = "MusicApp.db";
     //DATABASE VERSION
-    private static final int DATABASE_VERSION=7;
+    private static final int DATABASE_VERSION=9;
 
     public static final  String TABLE_MUSICINFO="MUSIC";
     public static final String TABLE_MUSICSCOREINFO="MUSIC_SCORE";
