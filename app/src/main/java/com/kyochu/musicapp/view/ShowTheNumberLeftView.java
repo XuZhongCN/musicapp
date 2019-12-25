@@ -46,7 +46,7 @@ public class ShowTheNumberLeftView extends View {
         for (int i=0;i<8;i++){
             canvas.drawLine(0,height/7*i,width,height/7*i,paint);
             canvas.rotate(-90,width/10*7,height/7*i-height/14+5);
-            canvas.drawText(""+i,width/10*7,height/7*i-height/14+5,textPaint);
+            canvas.drawText(""+(8-i),width/10*7,height/7*i-height/14+5,textPaint);
             canvas.rotate(90,width/10*7,height/7*i-height/14+5);
         }
         for (int i=0;i<8;i++){
