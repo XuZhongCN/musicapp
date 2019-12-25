@@ -17,8 +17,9 @@
             android:layout_weight="1"
             android:orientation="horizontal">
             <LinearLayout
-                android:layout_width="50dp"
-                android:layout_height="match_parent" android:orientation="vertical">
+                android:layout_width="150dp"
+                android:layout_height="444dp" android:orientation="vertical">
+
                 <!--<TextView
                     android:text="3/3"
                     android:id="@+id/beat"
@@ -31,57 +32,62 @@
                     android:background="@null"
                     android:gravity="center"
                     android:id="@+id/beat"></Spinner>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical|center"
-                    android:id="@+id/text1" android:text="@string/text1"></TextView>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical|center"
-                    android:id="@+id/text2" android:text="@string/text2"></TextView>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical|center"
-                    android:id="@+id/text3" android:text="@string/text3"></TextView>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical|center"
-                    android:id="@+id/text4" android:text="@string/text4"></TextView>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical|center"
-                    android:id="@+id/text5" android:text="@string/text5"></TextView>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical|center"
-                    android:id="@+id/text6" android:text="@string/text6"></TextView>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical|center"
-                    android:id="@+id/text7" android:text="@string/text7"></TextView>
+                <com.kyochu.musicapp.view.ShowTheNumberLeftView
+                    android:layout_width="150dp"
+                    android:layout_height="404dp">
+
+                </com.kyochu.musicapp.view.ShowTheNumberLeftView>
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center_vertical|center"-->
+<!--                    android:id="@+id/text1" android:text="@string/text1"></TextView>-->
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center_vertical|center"-->
+<!--                    android:id="@+id/text2" android:text="@string/text2"></TextView>-->
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center_vertical|center"-->
+<!--                    android:id="@+id/text3" android:text="@string/text3"></TextView>-->
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center_vertical|center"-->
+<!--                    android:id="@+id/text4" android:text="@string/text4"></TextView>-->
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center_vertical|center"-->
+<!--                    android:id="@+id/text5" android:text="@string/text5"></TextView>-->
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center_vertical|center"-->
+<!--                    android:id="@+id/text6" android:text="@string/text6"></TextView>-->
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center_vertical|center"-->
+<!--                    android:id="@+id/text7" android:text="@string/text7"></TextView>-->
                 <!--<TextView-->
                     <!--android:layout_width="match_parent"-->
                     <!--android:layout_height="0dp"-->
                     <!--android:layout_weight="1"-->
                     <!--android:gravity="center_vertical|center"-->
                     <!--android:id="@+id/text8" android:text="@string/text8"></TextView>-->
-                <View
+              <!--  <View
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"></View>
+                    android:layout_height="40dp"></View>-->
             </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -185,6 +191,7 @@
                                 android:gravity="center_vertical|center"
                                 android:id="@+id/top11" android:text="3/3"></Spinner>
                         </LinearLayout>
+                        <!--android:layout_height="404dp"-->
                         <com.kyochu.musicapp.view.MusicScoreView
                             android:id="@+id/musicScoreView"
                             android:layout_width="match_parent"
