@@ -2,6 +2,8 @@ package com.kyochu.musicapp.db;
 
 import android.content.Context;
 
+import com.kyochu.musicapp.music.MusicLoader;
+
 import java.util.List;
 
 import static com.kyochu.musicapp.db.DBHelper.TABLE_MUSICINFO;
@@ -96,6 +98,18 @@ public class InitDataToDB {
             "insert into MUSIC_SCORE(music_id,order_num,score) values(2,34,1);",
             "insert into MUSIC_SCORE(music_id,order_num,score) values(2,35,1);",
             "insert into MUSIC_SCORE(music_id,order_num,score) values(2,36,8);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(2,37,1);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(2,38,2);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(2,39,3);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(2,40,1);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(2,41,1);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(2,42,2);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(2,43,3);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(2,44,1);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(2,45,3);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(2,46,4);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(2,47,5);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(2,48,8);",
             "insert into MUSIC(_id,name,section_size,beat) values(3,'Ode an die Freude',4,'4/4');",
             "insert into MUSIC_SCORE(music_id,order_num,score) values(3,1,3);",
             "insert into MUSIC_SCORE(music_id,order_num,score) values(3,2,3);",
@@ -128,7 +142,23 @@ public class InitDataToDB {
             "insert into MUSIC_SCORE(music_id,order_num,score) values(3,29,2);",
             "insert into MUSIC_SCORE(music_id,order_num,score) values(3,30,1);",
             "insert into MUSIC_SCORE(music_id,order_num,score) values(3,31,1);",
-            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,32,8);"
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,32,8);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,33,3);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,34,3);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,35,4);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,36,5);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,37,5);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,38,4);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,39,3);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,40,2);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,41,1);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,42,1);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,43,2);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,44,3);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,45,3);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,46,2);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,47,2);",
+            "insert into MUSIC_SCORE(music_id,order_num,score) values(3,48,8);"
     };
     public void initDB(Context context){
         DMLHelper dmlHelper=new DMLHelper(context);
@@ -141,5 +171,7 @@ public class InitDataToDB {
         for (int i = 0; i < insertString.length; i++) {
             dmlHelper.exec(insertString[i]);
         }
+
+
     }
 }
