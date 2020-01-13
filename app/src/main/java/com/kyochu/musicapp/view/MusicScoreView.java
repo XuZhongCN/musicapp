@@ -25,6 +25,7 @@ import com.kyochu.musicapp.pojo.MusicScore;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -130,6 +131,7 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
     private List<View> topViews=null;
     private List<View> bottomViews=null;
     private int [] loops={1,1,1,1,1,1,1,1,1,1,1,1};
+    //A B的区分
     private int [] imageMarkerFlags={1,0,1,0,1,0,1,1,1,1,1,1};
 
     public void setImageMarkerFlags(int[] imageMarkerFlags) {
@@ -234,28 +236,41 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
         for(int i=0;i<musicScore.size();i++){
             for(int j=0;j<musicScore.get(i).size();j++) {
                 //canvas.drawRect(sum*rectWidth,((8-musicScore.get(i).get(j))-1)*rectWidth,(sum+1)*rectWidth,((8-musicScore.get(i).get(j)))*rectWidth,paint);
+                //参与运算的音符应该是基于小于100的数字。
+                int musicScoreInt=musicScore.get(i).get(j)%100;
 
-                float verticalParam=((8-musicScore.get(i).get(j))-1);
-                int musicScoreIndex=musicScore.get(i).get(j);
-                if(musicScoreIndex>8){
-                    if(musicScoreIndex==9){
+                float verticalParam=((8-musicScoreInt)-1);
+                int musicScoreIndex=musicScoreInt;
+                if(musicScoreIndex>7){
+                    if(musicScoreIndex==8){
                         verticalParam=0.5f;
                     }
-                    if(musicScoreIndex==10){
+                    if(musicScoreIndex==9){
                         verticalParam=1.5f;
                     }
-                    if(musicScoreIndex==11){
+                    if(musicScoreIndex==10){
                         verticalParam=2.5f;
                     }
-                    if(musicScoreIndex==12){
+                    if(musicScoreIndex==11){
                         verticalParam=4.5f;
                     }
-                    if(musicScoreIndex==13){
+                    if(musicScoreIndex==12){
                         verticalParam=5.5f;
                     }
                 }
-                if(verticalParam<=7){
+                /*if(verticalParam<7){
                     musicScore.get(i).get(j);
+                }
+                if(musicScore.get(i).get(j)==-1){
+                    sum++;
+                    continue;
+                }*/
+                if(musicScore.get(i).get(j)<100) {
+                    paint.setAlpha(128+50);
+                }else if(musicScore.get(i).get(j)>=100&&musicScore.get(i).get(j)<200){
+                    paint.setAlpha(128+50+50);
+                }else if(musicScore.get(i).get(j)>=200){
+                    paint.setAlpha(128-50+50);
                 }
                 if(sum*rectWidth+10<verticalLine&&verticalLine<(sum+1)*rectWidth+10){
                     if(imageMarkerFlags[i]==0){
@@ -319,9 +334,15 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
     }
 
     private int actionDownIndex;
+    private int lastDownX;
+    private int lastDownY;
     private int actionDownHisNumber;
     private int hisNumberIndex=-1;
     private int actionMoveHisNumber;
+    private int hisPlayI;
+    private int hisPlayJ;
+    private int hisPlayInt;
+    private boolean moveEnable=true;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getY()>=this.getHeight()){
@@ -332,6 +353,11 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
             if(event.getAction()==MotionEvent.ACTION_DOWN||event.getAction()==MotionEvent.ACTION_MOVE){
                 int x= (int) event.getX();
                 int y= (int) event.getY();
+                if(MotionEvent.ACTION_DOWN==event.getAction()){
+                    lastDownX=x;
+                    lastDownY=y;
+                    moveEnable=true;
+                }
                 int height=this.getHeight();
                 int rectWidth=(height/7);
                 int col=x/rectWidth;
@@ -342,79 +368,67 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
                     for (int j = 0; j < musicScore.get(i).size(); j++) {
                         if(sum==col){
                             if(event.getAction()==MotionEvent.ACTION_DOWN){
+                                lastDownX=x;
+                                lastDownY=y;
                                 actionDownIndex=i;
                                 actionDownHisNumber= musicScore.get(i).get(j);
-                            }else if(event.getAction()==MotionEvent.ACTION_MOVE){
+                                if(rowF>0.66&&rowF<1.33){
+                                    if(musicScore.get(i).get(j)%100==8){
+                                        moveEnable=false;
+                                    }
+                                }else if(rowF>1.66&&rowF<2.33){
+                                    if(musicScore.get(i).get(j)%100==9){
+                                        moveEnable=false;
+                                    }
+                                }else if(rowF>2.66&&rowF<3.33){
+                                    if(musicScore.get(i).get(j)%100==10){
+                                        moveEnable=false;
+                                    }
+                                }else if(rowF>4.66&&rowF<5.33){
+                                    if(musicScore.get(i).get(j)%100==11){
+                                        moveEnable=false;
+                                    }
+                                }else if(rowF>5.66&&rowF<6.33){
+                                    if(musicScore.get(i).get(j)%100==12){
+                                        moveEnable=false;
+                                    }
+                                }else{
+                                    if(musicScore.get(i).get(j)%100==7-row){
+                                        moveEnable=false;
+                                    }
+                                }
+                            }else if(event.getAction()==MotionEvent.ACTION_MOVE&&moveEnable){
                                 actionMoveHisNumber= musicScore.get(i).get(j);
                             }
-                            //startMusic?
-                            //reStart Music ???
-                            if(rowF>0.66&&rowF<1.33){
-                                musicPlay(1,12);
-                            }else if(rowF>1.66&&rowF<2.33){
-                                musicPlay(1,11);
-                            }else if(rowF>2.66&&rowF<3.33){
-                                musicPlay(1,10);
-                            }else if(rowF>4.66&&rowF<5.33){
-                                musicPlay(1,9);
-                            }else if(rowF>5.66&&rowF<6.33){
-                                musicPlay(1,8);
-                            }else{
-                                musicPlay(1,7-row);
-                            }
-                          /*  if(!(((7-row)==actionDownHisNumber||(7-row)==actionMoveHisNumber)&&hisNumberIndex==(sum))){
-                                if(actionDownHisNumber!=(7-row)){
-                                    if(rowF>0.66&&rowF<1.33){
-                                        musicPlay(13);
-                                    }else if(rowF>1.66&&rowF<2.33){
-                                        musicPlay(12);
-                                    }else if(rowF>2.66&&rowF<3.33){
-                                        musicPlay(11);
-                                    }else if(rowF>4.66&&rowF<5.33){
-                                        musicPlay(10);
-                                    }else if(rowF>5.66&&rowF<6.33){
-                                        musicPlay(9);
-                                    }else{
-                                        musicPlay(7-row);
-                                    }
-                                    hisNumberIndex=sum;
+
+                            if(event.getAction()==MotionEvent.ACTION_DOWN||(event.getAction()==MotionEvent.ACTION_MOVE&&moveEnable)) {
+                                if (rowF > 0.66 && rowF < 1.33) {
+                                    musicScore.get(i).set(j, 8);
+                                } else if (rowF > 1.66 && rowF < 2.33) {
+                                    musicScore.get(i).set(j, 9);
+                                } else if (rowF > 2.66 && rowF < 3.33) {
+                                    musicScore.get(i).set(j, 10);
+                                } else if (rowF > 4.66 && rowF < 5.33) {
+                                    musicScore.get(i).set(j, 11);
+                                } else if (rowF > 5.66 && rowF < 6.33) {
+                                    musicScore.get(i).set(j, 12);
+                                } else {
+                                    musicScore.get(i).set(j, 7 - row);
                                 }
-                            }else{
-                                if(actionDownHisNumber==8&&hisNumberIndex!=sum){
-                                    if(rowF>0.66&&rowF<1.33){
-                                        musicPlay(13);
-                                    }else if(rowF>1.66&&rowF<2.33){
-                                        musicPlay(12);
-                                    }else if(rowF>2.66&&rowF<3.33){
-                                        musicPlay(11);
-                                    }else if(rowF>4.66&&rowF<5.33){
-                                        musicPlay(10);
-                                    }else if(rowF>5.66&&rowF<6.33){
-                                        musicPlay(9);
-                                    }else{
-                                        musicPlay(7-row);
+                                if(moveEnable) {
+                                    if (!(hisPlayI == i && hisPlayJ == j && hisPlayInt == musicScore.get(i).get(j))) {
+                                        hisPlayI = i;
+                                        hisPlayJ = j;
+                                        hisPlayInt = musicScore.get(i).get(j);
+                                        if(imageMarkerFlags[(musicScore.get(0).size()*i+j)/chapterSize]==0){
+                                            useSoundId=mSoundIdA;
+                                        }else{
+                                            useSoundId=mSoundIdB;
+                                        }
+                                        musicPlay(1, musicScore.get(i).get(j));
                                     }
-                                    hisNumberIndex=sum;
                                 }
-                            }*/
-
-
-
-                            if(rowF>0.66&&rowF<1.33){
-                                musicScore.get(i).set(j,9);
-                            }else if(rowF>1.66&&rowF<2.33){
-                                musicScore.get(i).set(j,10);
-                            }else if(rowF>2.66&&rowF<3.33){
-                                musicScore.get(i).set(j,11);
-                            }else if(rowF>4.66&&rowF<5.33){
-                                musicScore.get(i).set(j,12);
-                            }else if(rowF>5.66&&rowF<6.33){
-                                musicScore.get(i).set(j,13);
-                            }else{
-                                musicScore.get(i).set(j,7-row);
                             }
-
-
                             //musicScore.get(i).set(j,11);
                         }
                         sum++;
@@ -427,14 +441,76 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
                 int rectWidth=(height/7);
                 int col=x/rectWidth;
                 int row=y/rectWidth;
+                float rowF=1.0f*y/rectWidth;
                 int sum=0;
                 for (int i = 0; i < musicScore.size(); i++) {
                     for (int j = 0; j < musicScore.get(i).size(); j++) {
                         if(sum==col){
                             if(actionDownIndex==i) {
-                                if(musicScore.get(i).get(j)==actionDownHisNumber){
-                                    musicScore.get(i).set(j, 8);
-                                    actionMoveHisNumber=8;
+                                //按下和抬起在一个位置，所以是move
+                                int dy=y-lastDownY;
+                                Log.e("dy-------------:",dy+"");
+                                if(Math.abs(dy)<5) {
+                                    if (musicScore.get(i).get(j) == actionDownHisNumber) {
+                                        musicScore.get(i).set(j, -1);
+                                        actionMoveHisNumber = -1;
+                                    }
+                                }else{
+                                    if(dy>10){
+                                        //向下滑动
+                                        if(rowF>0.66&&rowF<1.33){
+                                            musicScore.get(i).set(j,8+100);
+                                        }else if(rowF>1.66&&rowF<2.33){
+                                            musicScore.get(i).set(j,9+100);
+                                        }else if(rowF>2.66&&rowF<3.33){
+                                            musicScore.get(i).set(j,10+100);
+                                        }else if(rowF>4.66&&rowF<5.33){
+                                            musicScore.get(i).set(j,11+100);
+                                        }else if(rowF>5.66&&rowF<6.33){
+                                            musicScore.get(i).set(j,12+100);
+                                        }else{
+                                            musicScore.get(i).set(j,7-row+100);
+                                        }
+                                        if(!(hisPlayI==i&&hisPlayJ==j&&hisPlayInt==musicScore.get(i).get(j))) {
+                                            hisPlayI = i;
+                                            hisPlayJ = j;
+                                            hisPlayInt = musicScore.get(i).get(j);
+                                            if(imageMarkerFlags[(musicScore.get(0).size()*i+j)/chapterSize]==0){
+                                                useSoundId=mSoundIdA;
+                                            }else{
+                                                useSoundId=mSoundIdB;
+                                            }
+                                            musicPlay(1, musicScore.get(i).get(j));
+                                        }
+                                        //musicScore.get(i).set(j, 7-row+100);
+                                    }else{
+                                        //向上滑动
+                                        if(rowF>0.66&&rowF<1.33){
+                                            musicScore.get(i).set(j,8+200);
+                                        }else if(rowF>1.66&&rowF<2.33){
+                                            musicScore.get(i).set(j,9+200);
+                                        }else if(rowF>2.66&&rowF<3.33){
+                                            musicScore.get(i).set(j,10+200);
+                                        }else if(rowF>4.66&&rowF<5.33){
+                                            musicScore.get(i).set(j,11+200);
+                                        }else if(rowF>5.66&&rowF<6.33){
+                                            musicScore.get(i).set(j,12+200);
+                                        }else{
+                                            musicScore.get(i).set(j,7-row+200);
+                                        }
+                                        if(!(hisPlayI==i&&hisPlayJ==j&&hisPlayInt==musicScore.get(i).get(j))) {
+                                            hisPlayI = i;
+                                            hisPlayJ = j;
+                                            hisPlayInt = musicScore.get(i).get(j);
+                                            if(imageMarkerFlags[(musicScore.get(0).size()*i+j)/chapterSize]==0){
+                                                useSoundId=mSoundIdA;
+                                            }else{
+                                                useSoundId=mSoundIdB;
+                                            }
+                                            musicPlay(1, musicScore.get(i).get(j));
+                                        }
+                                        //musicScore.get(i).set(j, 7-row+200);
+                                    }
                                 }
                             }
                         }
@@ -442,6 +518,8 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
                     }
                 }
             }
+            //确定到底是down导致播放还是move导致播放
+
             invalidate();
             return true;
         }
@@ -452,9 +530,9 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
      * 创建SoundPool ，注意 api 等级
      */
     public static SoundPool mSoundPool;
-    public static int [][] mSoundId={{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}};
+    public static int [][] mSoundIdA={{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}};
 
-
+    public static int [][] mSoundIdB={{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}};
     @Override
     public void onLoadComplete(SoundPool soundPool, int i, int i1) {
 
@@ -495,7 +573,6 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
             for (int i = 0; i < loops.length; i++) {
                 copyLoops[i]=loops[i];
             }
-
             int historyNum=-999;
             for (verticalLine = -5>verticalLineHis?-5:verticalLineHis; verticalLine < getWidth()+10; verticalLine+=5) {
                 scrollHandler.sendEmptyMessage(1);
@@ -512,11 +589,8 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
                         for (int j = 0; j < musicScore.get(i).size(); j++) {
                             if(historyNum==0){
                                 if(j==musicScore.get(i).size()-1){
-
                                     if(copyLoops[i]>1){
                                         //show number  6-copyLoops[i]
-
-
                                         Message message=Message.obtain();
                                         message.what=9;
                                         message.arg1= loops[i]-copyLoops[i]+1;
@@ -526,6 +600,11 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
                                         int playNum=getPlayNumber(historyNum);
                                         int indexOne=getIndexOne(historyNum);
                                         if(playNum!=-1&&playNum!=8) {
+                                            if(imageMarkerFlags[historyNum/chapterSize]==0){
+                                                useSoundId=mSoundIdA;
+                                            }else{
+                                                useSoundId=mSoundIdB;
+                                            }
                                             musicPlay(indexOne,playNum);
                                             //musicDNAView.setAmplitudeMultiple(6,150);
                                         }
@@ -556,12 +635,18 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
                     historyNum=verticalLine/(getHeight()/7);
                     int playNum=getPlayNumber(historyNum);
                     int indexOne=getIndexOne(historyNum);
-                    if(playNum!=-1&&playNum!=8) {
-                        if(playNum<8){
-                            musicPlay(indexOne,playNum);
+                    if(!(playNum==-1||playNum==99||playNum==199)) {
+                        if(imageMarkerFlags[historyNum/chapterSize]==0){
+                            useSoundId=mSoundIdA;
                         }else{
-                            musicPlay(indexOne,21-playNum);
+                            useSoundId=mSoundIdB;
                         }
+                        musicPlay(indexOne,playNum);
+//                        if(playNum%100<8){
+//                            musicPlay(indexOne,playNum);
+//                        }else{
+//                            musicPlay(indexOne,21-playNum);
+//                        }
                         //musicDNAView.setAmplitudeMultiple(6,150);
                     }
                 }
@@ -655,12 +740,20 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
     public void stop(){
         isPlaing=false;
     }
+    private int [][] useSoundId=mSoundIdA;
 
     public void  musicPlay(int indexOne,int num){
-        num=num-1;
-        if(num>=0&&num<mSoundId[indexOne].length){
-            mSoundPool.play(mSoundId[indexOne][num], 0.5f, 0.5f, 0, 0, 1.0f);
+        num = num - 1;
+        if(num<100) {
+            if (num >= 0 && num < useSoundId[0].length) {
+                mSoundPool.play(useSoundId[1][num], 0.5f, 0.5f, 0, 0, 1.0f);
+            }
+        }else if(num>=100&&num<200){
+                mSoundPool.play(useSoundId[0][num-100], 0.5f, 0.5f, 0, 0, 1.0f);
+        }else if(num>=200){
+            mSoundPool.play(useSoundId[2][num-200], 0.5f, 0.5f, 0, 0, 1.0f);
         }
+
     }
 
 }

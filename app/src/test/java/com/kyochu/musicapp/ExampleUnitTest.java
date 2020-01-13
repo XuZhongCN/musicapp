@@ -13,12 +13,6 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        for (int i = 0; i < 100000; i++) {
-            int x=52*i+2;
-            if(x%14==4&&x%19==1&&x%25==5){
-                System.out.println(x);
-                System.out.println(123456);
-            }
-        }
+        System.out.println(100%(-1));
     }
 }

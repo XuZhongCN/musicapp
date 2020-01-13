@@ -7,6 +7,8 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.kyochu.musicapp.R;
+
 import org.w3c.dom.Text;
 
 import androidx.annotation.Nullable;
@@ -34,9 +36,12 @@ public class ShowTheNumberLeftView extends View {
         textPaint=new TextPaint();
         textPaint.setColor(0xff000000);
         textPaint.setTextSize(20);
+        textPaint.setAntiAlias(true);
     }
 
     private int rectHeight=16;
+    private String [] texts={"ド","レ","ミ","ファ","ソ","ラ","シ","シ","シ","シ","シ"};
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -45,9 +50,11 @@ public class ShowTheNumberLeftView extends View {
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         for (int i=0;i<8;i++){
             canvas.drawLine(0,height/7*i,width,height/7*i,paint);
-            canvas.rotate(-90,width/10*7,height/7*i-height/14+5);
-            canvas.drawText(""+(8-i),width/10*7,height/7*i-height/14+5,textPaint);
-            canvas.rotate(90,width/10*7,height/7*i-height/14+5);
+//            canvas.rotate(-90,width/10*7,height/7*i-height/14+5);
+            if(7-i>=0) {
+                canvas.drawText(texts[7 - i], width / 10 * 7, height / 7 * i - height / 14 + 5, textPaint);
+            }
+//            canvas.rotate(90,width/10*7,height/7*i-height/14+5);
         }
         for (int i=0;i<8;i++){
             if(i!=0&&i!=0&&i!=4&&i!=7) {
