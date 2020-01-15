@@ -452,25 +452,28 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
                                 Log.e("dy-------------:",dy+"");
                                 if(Math.abs(dy)<5) {
                                     if (musicScore.get(i).get(j) == actionDownHisNumber) {
-                                        musicScore.get(i).set(j, -1);
-                                        actionMoveHisNumber = -1;
+                                        if(moveEnable==false) {
+                                            musicScore.get(i).set(j, -1);
+                                            actionMoveHisNumber = -1;
+                                        }
                                     }
                                 }else{
                                     if(dy>10){
                                         //向下滑动
-                                        if(rowF>0.66&&rowF<1.33){
-                                            musicScore.get(i).set(j,8+100);
-                                        }else if(rowF>1.66&&rowF<2.33){
-                                            musicScore.get(i).set(j,9+100);
-                                        }else if(rowF>2.66&&rowF<3.33){
-                                            musicScore.get(i).set(j,10+100);
-                                        }else if(rowF>4.66&&rowF<5.33){
-                                            musicScore.get(i).set(j,11+100);
-                                        }else if(rowF>5.66&&rowF<6.33){
-                                            musicScore.get(i).set(j,12+100);
-                                        }else{
-                                            musicScore.get(i).set(j,7-row+100);
-                                        }
+//                                        if(rowF>0.66&&rowF<1.33){
+//                                            musicScore.get(i).set(j,8+100);
+//                                        }else if(rowF>1.66&&rowF<2.33){
+//                                            musicScore.get(i).set(j,9+100);
+//                                        }else if(rowF>2.66&&rowF<3.33){
+//                                            musicScore.get(i).set(j,10+100);
+//                                        }else if(rowF>4.66&&rowF<5.33){
+//                                            musicScore.get(i).set(j,11+100);
+//                                        }else if(rowF>5.66&&rowF<6.33){
+//                                            musicScore.get(i).set(j,12+100);
+//                                        }else{
+//                                            musicScore.get(i).set(j,7-row+100);
+//                                        }
+                                        musicScore.get(i).set(j,musicScore.get(i).get(j)+100);
                                         if(!(hisPlayI==i&&hisPlayJ==j&&hisPlayInt==musicScore.get(i).get(j))) {
                                             hisPlayI = i;
                                             hisPlayJ = j;
@@ -485,19 +488,20 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
                                         //musicScore.get(i).set(j, 7-row+100);
                                     }else{
                                         //向上滑动
-                                        if(rowF>0.66&&rowF<1.33){
-                                            musicScore.get(i).set(j,8+200);
-                                        }else if(rowF>1.66&&rowF<2.33){
-                                            musicScore.get(i).set(j,9+200);
-                                        }else if(rowF>2.66&&rowF<3.33){
-                                            musicScore.get(i).set(j,10+200);
-                                        }else if(rowF>4.66&&rowF<5.33){
-                                            musicScore.get(i).set(j,11+200);
-                                        }else if(rowF>5.66&&rowF<6.33){
-                                            musicScore.get(i).set(j,12+200);
-                                        }else{
-                                            musicScore.get(i).set(j,7-row+200);
-                                        }
+//                                        if(rowF>0.66&&rowF<1.33){
+//                                            musicScore.get(i).set(j,8+200);
+//                                        }else if(rowF>1.66&&rowF<2.33){
+//                                            musicScore.get(i).set(j,9+200);
+//                                        }else if(rowF>2.66&&rowF<3.33){
+//                                            musicScore.get(i).set(j,10+200);
+//                                        }else if(rowF>4.66&&rowF<5.33){
+//                                            musicScore.get(i).set(j,11+200);
+//                                        }else if(rowF>5.66&&rowF<6.33){
+//                                            musicScore.get(i).set(j,12+200);
+//                                        }else{
+//                                            musicScore.get(i).set(j,7-row+200);
+//                                        }
+                                        musicScore.get(i).set(j,musicScore.get(i).get(j)+200);
                                         if(!(hisPlayI==i&&hisPlayJ==j&&hisPlayInt==musicScore.get(i).get(j))) {
                                             hisPlayI = i;
                                             hisPlayJ = j;
