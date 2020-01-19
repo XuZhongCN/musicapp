@@ -211,6 +211,7 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
             }
             musicScore.add(temp);
         }
+        random=new Random();
         //createSoundPoolIfNeeded();
     }
 
@@ -329,7 +330,7 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
         //paint.setColor(0xFF3F51B5);
         paint.setColor(0xff000000);
         paint.setStyle(Paint.Style.STROKE);
-        canvas.drawLine(verticalLine,0,verticalLine,height,paint);
+        canvas.drawLine(verticalLine-rectWidth,0,verticalLine-rectWidth,height,paint);
 
     }
 
@@ -534,9 +535,12 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
      * 创建SoundPool ，注意 api 等级
      */
     public static SoundPool mSoundPool;
+    //钢琴
     public static int [][] mSoundIdA={{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}};
-
+    //吉他
     public static int [][] mSoundIdB={{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}};
+    //狗叫
+    public static int [][] mSoundIdC={{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}};
     @Override
     public void onLoadComplete(SoundPool soundPool, int i, int i1) {
 
@@ -745,14 +749,26 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
         isPlaing=false;
     }
     private int [][] useSoundId=mSoundIdA;
-
+    private Random random;
     public void  musicPlay(int indexOne,int num){
         num = num - 1;
         if(num<100) {
             if (num >= 0 && num < useSoundId[0].length) {
+                if(useSoundId==mSoundIdB){
+                    if(random.nextInt()%10==0){
+                        mSoundPool.play(mSoundIdC[1][num], 0.5f, 0.5f, 0, 0, 1.0f);
+                        return;
+                    }
+                }
                 mSoundPool.play(useSoundId[1][num], 0.5f, 0.5f, 0, 0, 1.0f);
             }
         }else if(num>=100&&num<200){
+            if(useSoundId==mSoundIdB){
+                if(random.nextInt()%10==0){
+                    mSoundPool.play(mSoundIdC[0][num], 0.5f, 0.5f, 0, 0, 1.0f);
+                    return;
+                }
+            }
                 mSoundPool.play(useSoundId[0][num-100], 0.5f, 0.5f, 0, 0, 1.0f);
         }else if(num>=200){
             mSoundPool.play(useSoundId[2][num-200], 0.5f, 0.5f, 0, 0, 1.0f);

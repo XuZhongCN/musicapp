@@ -9,6 +9,8 @@ import com.kyochu.musicapp.R;
 
 import static com.kyochu.musicapp.view.MusicScoreView.mSoundIdA;
 import static com.kyochu.musicapp.view.MusicScoreView.mSoundIdB;
+
+import static com.kyochu.musicapp.view.MusicScoreView.mSoundIdC;
 import static com.kyochu.musicapp.view.MusicScoreView.mSoundPool;
 
 public class MusicLoader{
@@ -107,6 +109,34 @@ public class MusicLoader{
             mSoundIdB[2][9] = mSoundPool.load(context, R.raw.g3_4_5, 1);
             mSoundIdB[2][10] = mSoundPool.load(context, R.raw.g3_2_5, 1);
             mSoundIdB[2][11] = mSoundPool.load(context, R.raw.g3_1_5, 1);
+
+
+
+            mSoundIdC[0][0] = mSoundPool.load(context, R.raw.d1_1, 1);
+            mSoundIdC[0][1] = mSoundPool.load(context, R.raw.d1_2, 1);
+            mSoundIdC[0][2] = mSoundPool.load(context, R.raw.d1_3, 1);
+            mSoundIdC[0][3] = mSoundPool.load(context, R.raw.d1_4, 1);
+            mSoundIdC[0][4] = mSoundPool.load(context, R.raw.d1_5, 1);
+            mSoundIdC[0][5] = mSoundPool.load(context, R.raw.d1_6, 1);
+            mSoundIdC[0][6] = mSoundPool.load(context, R.raw.d1_7, 1);
+            mSoundIdC[0][7] = mSoundPool.load(context, R.raw.d1_6_5, 1);
+            mSoundIdC[0][8] = mSoundPool.load(context, R.raw.d1_5_5, 1);
+            mSoundIdC[0][9] = mSoundPool.load(context, R.raw.d1_4_5, 1);
+            mSoundIdC[0][10] = mSoundPool.load(context, R.raw.d1_2_5, 1);
+            mSoundIdC[0][11] = mSoundPool.load(context, R.raw.d1_1_5, 1);
+
+            mSoundIdC[1][0] = mSoundPool.load(context, R.raw.d2_1, 1);
+            mSoundIdC[1][1] = mSoundPool.load(context, R.raw.d2_2, 1);
+            mSoundIdC[1][2] = mSoundPool.load(context, R.raw.d2_3, 1);
+            mSoundIdC[1][3] = mSoundPool.load(context, R.raw.d2_4, 1);
+            mSoundIdC[1][4] = mSoundPool.load(context, R.raw.d2_5, 1);
+            mSoundIdC[1][5] = mSoundPool.load(context, R.raw.d2_6, 1);
+            mSoundIdC[1][6] = mSoundPool.load(context, R.raw.d2_7, 1);
+            mSoundIdC[1][7] = mSoundPool.load(context, R.raw.d2_6_5, 1);
+            mSoundIdC[1][8] = mSoundPool.load(context, R.raw.d2_5_5, 1);
+            mSoundIdC[1][9] = mSoundPool.load(context, R.raw.d2_4_5, 1);
+            mSoundIdC[1][10] = mSoundPool.load(context, R.raw.d2_2_5, 1);
+            mSoundIdC[1][11] = mSoundPool.load(context, R.raw.d2_1_5, 1);
         }
     }
 
