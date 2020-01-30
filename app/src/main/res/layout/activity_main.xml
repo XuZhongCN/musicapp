@@ -555,6 +555,16 @@
                 android:clickable="true"
                 android:onClick="changedMode"
                 ></ImageView>
+            <TextView
+                android:padding="2dp"
+                android:text="BMP x1"
+                android:textSize="20dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:clickable="true"
+                android:onClick="changedSpeed"
+                ></TextView>
             <com.kyochu.musicapp.view.TouchBarView
                 android:id="@+id/rightTouchBar"
                 android:layout_width="0dp"

@@ -197,12 +197,15 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
     public void setBottomViews(List<View> bottomViews) {
         this.bottomViews = bottomViews;
     }
-
+    BitmapFactory.Options options=null;
     private void init(){
         paint=new Paint();
         paint.setColor(0xff229b77);
         paint.setStrokeWidth(1);
-
+        options=new BitmapFactory.Options();
+        options.inSampleSize=16;
+//        options.outHeight=43;
+//        options.outWidth=50;
         musicScore=new ArrayList<>();
         for(int i=0;i<12;i++){
             ArrayList temp=new ArrayList<Integer>();
@@ -267,27 +270,56 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
                     continue;
                 }*/
                 if(musicScore.get(i).get(j)<100) {
-                    paint.setAlpha(128+50);
+                    if(sum*rectWidth+10<verticalLine&&verticalLine<(sum+1)*rectWidth+10){
+                        if(imageMarkerFlags[i]==0){
+                            canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver2),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
+                        }else{
+                            canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver4),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
+
+                        }
+                    }else{
+                        if(imageMarkerFlags[i]==0){
+                            canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
+                        }else{
+                            canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver3),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
+
+                        }
+                    }
                 }else if(musicScore.get(i).get(j)>=100&&musicScore.get(i).get(j)<200){
-                    paint.setAlpha(128+50+50);
+                    if(sum*rectWidth+10<verticalLine&&verticalLine<(sum+1)*rectWidth+10){
+                        if(imageMarkerFlags[i]==0){
+                            canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver2l,options),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
+                        }else{
+                            canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver4l,options),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
+
+                        }
+                    }else{
+                        if(imageMarkerFlags[i]==0){
+                            canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaverl,options),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
+                        }else{
+                            canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver3l,options),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
+
+                        }
+                    }
                 }else if(musicScore.get(i).get(j)>=200){
-                    paint.setAlpha(128-50+50);
-                }
-                if(sum*rectWidth+10<verticalLine&&verticalLine<(sum+1)*rectWidth+10){
-                    if(imageMarkerFlags[i]==0){
-                        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver2),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
-                    }else{
-                        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver4),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
+                    if(sum*rectWidth+10<verticalLine&&verticalLine<(sum+1)*rectWidth+10){
+                        if(imageMarkerFlags[i]==0){
 
-                    }
-                }else{
-                    if(imageMarkerFlags[i]==0){
-                        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
-                    }else{
-                        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver3),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
+                            canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver2h,options),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
+                        }else{
+                            canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver4h,options),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
 
+                        }
+                    }else{
+                        if(imageMarkerFlags[i]==0){
+                            canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaverh,options),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
+                        }else{
+                            canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.quaver3h,options),sum*horizontalWidth+10,verticalParam*rectWidth+10,paint);
+
+                        }
                     }
                 }
+
                 sum++;
             }
         }
@@ -330,7 +362,7 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
         //paint.setColor(0xFF3F51B5);
         paint.setColor(0xff000000);
         paint.setStyle(Paint.Style.STROKE);
-        canvas.drawLine(verticalLine-rectWidth,0,verticalLine-rectWidth,height,paint);
+        canvas.drawLine(verticalLine-5,0,verticalLine-5,height,paint);
 
     }
 
@@ -570,7 +602,12 @@ public class MusicScoreView extends View implements SoundPool.OnLoadCompleteList
     };
 
     public int verticalLine=-5;
-    private int speed=20;
+    private int speed=40;
+
+    public void setSpeed(int speed) {
+        this.speed = 40/speed;
+    }
+
     private int [] copyLoops={1,1,1,1,1,1,1,1,1,1,1,1};
     private boolean isPlaing=false;
     public class PlayMusic implements  Runnable{

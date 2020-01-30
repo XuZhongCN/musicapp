@@ -24,11 +24,11 @@ public class MusicLoader{
                         .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                         .build();
                 mSoundPool = new SoundPool.Builder()
-                        .setMaxStreams(16)
+                        .setMaxStreams(128)
                         .setAudioAttributes(audioAttributes)
                         .build();
             } else { // 5.0 以前
-                mSoundPool = new SoundPool(16, AudioManager.STREAM_MUSIC, 5);  // 创建SoundPool
+                mSoundPool = new SoundPool(128, AudioManager.STREAM_MUSIC, 0);  // 创建SoundPool
             }
             //mSoundPool.setOnLoadCompleteListener(this);  // 设置加载完成监听
 

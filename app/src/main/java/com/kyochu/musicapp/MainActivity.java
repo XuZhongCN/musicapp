@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.kyochu.musicapp.db.DMLHelper;
 import com.kyochu.musicapp.pojo.Music;
 import com.kyochu.musicapp.view.DoublePointHorizontalScrollView;
@@ -334,5 +336,16 @@ public class MainActivity extends AppCompatActivity {
             musicScoreView.postInvalidate();
             doublePointHorizontalScrollView.smoothScrollTo(0,0);
         }
+    }
+    public void changedSpeed(View view){
+        TextView textView= (TextView) view;
+        String string = (String) textView.getText();
+        int speed=Integer.parseInt(string.substring(string.length()-1,string.length()))+1;
+        if(speed==4){
+            speed=1;
+        }
+        musicScoreView.setSpeed(speed);
+        string="BMP x"+speed;
+        textView.setText(string);
     }
 }
